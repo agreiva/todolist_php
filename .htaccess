@@ -1,0 +1,17 @@
+# Aktifkan Rewrite Engine
+RewriteEngine On
+
+# Mengarahkan semua permintaan ke index.php jika file tidak ada
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L]
+
+# Mengizinkan akses ke api.php
+RewriteRule ^api/(.*)$ api.php [L,QSA]
+
+# Mengizinkan HTTP Methods: PUT, DELETE
+<IfModule mod_headers.c>
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type"
+</IfModule>
